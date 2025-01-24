@@ -10,17 +10,19 @@ import { Loader3Service } from '../../service/loader3.service';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit {
 
   firstPage: number = 1;
-
   moviesArr: Imovies[] = [];
   totalPages: number = 0;
   moviesArr$!: Observable<any>;
 
+
+  loadedMovies: { [key: number]: boolean } = {}; 
+
   constructor(
     private _tmdbService: TmdbService,
-    private _loaderService:Loader3Service
+    private _loaderService: Loader3Service
   ) { }
 
   ngOnInit(): void {
@@ -43,7 +45,7 @@ export class DashboardComponent implements OnInit{
   }
 
   goToPage(eve: PageEvent) {
-    this.firstPage  =eve.pageIndex+1;
+    this.firstPage = eve.pageIndex + 1;
     this.fetchMovies(this.firstPage);
   }
 
@@ -52,6 +54,10 @@ export class DashboardComponent implements OnInit{
       this.fetchMovies(this.firstPage);
       this.totalPages = this.firstPage;
     }
+  }
+
+  goToSinglePage(obj: Imovies) {
+    this._tmdbService._singleMovie$.next(obj)
   }
 
 }

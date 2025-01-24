@@ -1,0 +1,9 @@
+<div class="banner mb-4">
+    <img [src]="loadedMovies[movieObj.id] ? 'https://media.themoviedb.org/t/p/w220_and_h330_face' + movieObj.poster_path : 'assets/img/placeholderImg.png'"
+    (load)="loadedMovies[movieObj.id] = true" [alt]="movieObj.title" [title]="movieObj.title">
+
+    <div class="fairContent">
+        <h3>{{movieObj.title|uppercase}}</h3>
+
+    </div>
+</div>

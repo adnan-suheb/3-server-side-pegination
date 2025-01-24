@@ -10,6 +10,8 @@ import { AbsolutePipe } from './pipe/absolute.pipe';
 import { FormsModule } from '@angular/forms';
 import { DashboardComponent } from './shared/component/dashboard/dashboard.component';
 import { loaderInterceptor } from './shared/interceptors/loader.interceptor';
+import { SingleMovieComponent } from './shared/component/single-movie/single-movie.component';
+import { DataCacheInterceptor } from './shared/interceptors/data-caching.interceptor';
 
 
 @NgModule({
@@ -17,6 +19,7 @@ import { loaderInterceptor } from './shared/interceptors/loader.interceptor';
     AppComponent,
     AbsolutePipe,
     DashboardComponent,
+    SingleMovieComponent,
 
   ],
   imports: [
@@ -30,7 +33,8 @@ import { loaderInterceptor } from './shared/interceptors/loader.interceptor';
     provideClientHydration(),
     provideAnimationsAsync(),
 
-    { provide: HTTP_INTERCEPTORS, useClass: loaderInterceptor, multi: true}
+    { provide: HTTP_INTERCEPTORS, useClass: loaderInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: DataCacheInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

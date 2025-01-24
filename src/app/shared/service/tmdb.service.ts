@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { apiKey, baseUrl } from '../model/apis.const';
 import { HttpClient } from '@angular/common/http';
 import { Ires } from '../model/moviesArr.interface';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,8 @@ import { Subject } from 'rxjs';
 export class TmdbService {
 
 
-  singleMovie:Subject<any> = new Subject;
+  public _singleMovie$: BehaviorSubject<any> = new BehaviorSubject(null);
+
 
   constructor(
     private _http: HttpClient
