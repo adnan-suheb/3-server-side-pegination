@@ -9,8 +9,8 @@ mat-toolbar {
   width: 154px;
 
   img {
-      height: 100%;
-      width: 100%;
+    height: 100%;
+    width: 100%;
   }
 }
 
@@ -28,3 +28,26 @@ mat-toolbar {
   align-items: center;
   z-index: 1000; // Ensure it appears above other content
 }
+
+
+
+.btn-grad {
+  background-image: linear-gradient(to right, #72c8af 0%, #04b4e3 51%, #72c8af 100%);
+  padding: 5px 10px;
+  text-align: center;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: #032541 !important;
+  border-radius: 10px;
+  display: block;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-grad:hover {
+  background-position: right center; /* Moves the gradient on hover */
+  color: #fff;
+  box-shadow: 0 0 20px #eee;
+  text-decoration: none;
+}
+

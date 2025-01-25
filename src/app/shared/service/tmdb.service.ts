@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import { apiKey, baseUrl } from '../model/apis.const';
-import { HttpClient } from '@angular/common/http';
-import { Ires } from '../model/moviesArr.interface';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Imovies, Ires } from '../model/moviesArr.interface';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { IsingleMovieObj } from '../model/singleMovieObj.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TmdbService {
 
+  private apiUrl = 'https://api.themoviedb.org/3';
 
-  public _singleMovie$: BehaviorSubject<any> = new BehaviorSubject(null);
+  public _singleMovie$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
 
   constructor(
@@ -19,10 +21,21 @@ export class TmdbService {
 
 
   fetchAllMovies(pageNum: number) {
-    const movieApiUrl: string = `${baseUrl}/movie/popular?api_key=${apiKey}&page=${pageNum.toString()}`;
+    const params = new HttpParams()
+      .set("api_key", apiKey)
+      .set("page", pageNum.toString());
 
-    return this._http.get<Ires>(movieApiUrl)
+    // const movieApiUrl: string = `${baseUrl}/movie/popular?api_key=${apiKey}&page=${pageNum.toString()}`;
 
+    return this._http.get<Ires>(`${baseUrl}/movie/popular`, { params })
+
+  }
+
+
+
+  getMovieById(movieId: string): Observable<IsingleMovieObj> {
+    const url = `${this.apiUrl}/movie/${movieId}?api_key=${apiKey}&language=en-US`;
+    return this._http.get<IsingleMovieObj>(url);
   }
 
 

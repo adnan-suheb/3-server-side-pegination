@@ -1,9 +1,33 @@
-<div class="banner mb-4">
+<div class="banner mb-4" *ngIf="movieObj; else noData">
     <img [src]="loadedMovies[movieObj.id] ? 'https://media.themoviedb.org/t/p/w220_and_h330_face' + movieObj.poster_path : 'assets/img/placeholderImg.png'"
-    (load)="loadedMovies[movieObj.id] = true" [alt]="movieObj.title" [title]="movieObj.title">
+        (load)="loadedMovies[movieObj.id] = true" [alt]="movieObj.title" [title]="movieObj.title">
 
-    <div class="fairContent">
-        <h3>{{movieObj.title|uppercase}}</h3>
+
+
+
+    <div class="fairContent mb-4">
+        <h1>{{movieObj.title}}</h1>
+        <div class="ReleaseDate">
+            <h5>Release Date: {{ movieObj.release_date }}</h5>
+        </div>
+
+        <div class="overview">
+            <h4>Overview:</h4>
+            <p>{{movieObj.overview}}</p>
+
+        </div>
+        <div class="genre">
+            <h5>Genre: {{ getGenreNames(movieObj.genre_ids) }}</h5>
+        </div>
+
+        <div class="Ratings">
+            <h5>Ratings : {{ movieObj.vote_average|absolute }}</h5>
+        </div>
+
 
     </div>
 </div>
+
+<ng-template #noData>
+    <p class="alert alert-danger">No data Found</p>
+</ng-template>

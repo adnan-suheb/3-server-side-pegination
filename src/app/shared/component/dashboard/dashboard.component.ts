@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
   moviesArr$!: Observable<any>;
 
 
-  loadedMovies: { [key: number]: boolean } = {}; 
+  loadedMovies: { [key: number]: boolean } = {};
 
   constructor(
     private _tmdbService: TmdbService,
